@@ -20,8 +20,6 @@ module.exports = {
         "@typescript-eslint"
     ],
     "rules": {
-        '@typescript-eslint/ban-ts-comment': 'error',
-        '@typescript-eslint/no-explicit-any': 'warn',
         "indent": [
             "error",
             "tab"
@@ -38,5 +36,6 @@ module.exports = {
             "error",
             "always"
         ]
-    }
+    },
+
 }
