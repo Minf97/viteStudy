@@ -1,53 +1,32 @@
+// .eslintrc.js
 module.exports = {
-    "env": {
-        "browser": true,
-        "es2021": true,
-        "node": true,
+    env: {
+        browser: true,
+        es2021: true
     },
-    "globals": {
-        // 可以重写
-        "wx": true,
-        // 不可重写
-        "$": false,
-        "jQuery": false,
-        // 禁用
-        "uni": "off"
-    },
-    "extends": [
+    extends: [
         "eslint:recommended",
         "plugin:react/recommended",
-        // prettier
+        "plugin:@typescript-eslint/recommended",
+        // 1. 接入 prettier 的规则
         "prettier",
-        "plugin:@typescript-eslint/recommended"
+        "plugin:prettier/recommended"
     ],
-    "parser": "@typescript-eslint/parser",
-    "parserOptions": {
-        "ecmaVersion": "latest",
-        "sourceType": "module"
+    parser: "@typescript-eslint/parser",
+    parserOptions: {
+        ecmaFeatures: {
+            jsx: true
+        },
+        ecmaVersion: "latest",
+        sourceType: "module"
     },
-    "plugins": [
-        "react",
-        "@typescript-eslint",
-        "prettier"
-    ],
-    "rules": {
+    // 2. 加入 prettier 的 eslint 插件
+    plugins: ["react", "@typescript-eslint", "prettier"],
+    rules: {
+        // 3. 注意要加上这一句，开启 prettier 自动修复的功能
         "prettier/prettier": "error",
-        "indent": [
-            "error",
-            "tab"
-        ],
-        "linebreak-style": [
-            "error",
-            "unix"
-        ],
-        "quotes": [
-            "error",
-            "double"
-        ],
-        "semi": [
-            "error",
-            "always"
-        ]
-    },
-
-}
+        quotes: ["error", "single"],
+        semi: ["error", "always"],
+        "react/react-in-jsx-scope": "off"
+    }
+};
