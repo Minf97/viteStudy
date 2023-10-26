@@ -1,12 +1,12 @@
-import { defineConfig, normalizePath } from 'vite'
-import react from '@vitejs/plugin-react'
+import { defineConfig, normalizePath } from 'vite';
+import react from '@vitejs/plugin-react';
 // 如果类型报错，需要安装 @types/node: pnpm i @types/node -D
-import path from "path";
-import autoprefixer from "autoprefixer"
+import path from 'path';
+import autoprefixer from 'autoprefixer';
+import viteStylelint from 'vite-plugin-stylelint';
 
 // 用 normalizePath 解决 window 下的路径问题
 const variablePath = normalizePath(path.resolve('./src/variable.scss'));
-
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -24,7 +24,7 @@ export default defineConfig({
     modules: {
       // 通过 generateScopedName 控制生成的类名
       // name表示当前文件名，local表示类名
-      generateScopedName: "[name]__[local]__[hash:base64:5]"
+      generateScopedName: '[name]__[local]__[hash:base64:5]'
     },
     // 3. PostCSS
     postcss: {
@@ -36,20 +36,25 @@ export default defineConfig({
       ]
     }
   },
-  plugins: [react({
-    babel: {
-      // 加入babel 插件
-      // 一下插件包都需要提前安装
-      // 通过这个配置也可以添加其他 babel 插件
-      plugins: [
-        // 适配 styled-component
-        "babel-plugin-styled-components",
-        // 适配 emotion
-        "@emotion/babel-plugin"
-      ]
-    },
-    // 对于 emotion，需要单独加上这个配置
-    // 通过这个包来编译 emotion 中的特殊 jsx 语法
-    jsxImportSource: "@emotion/react"
-  })],
-})
+  plugins: [
+    react({
+      babel: {
+        // 加入babel 插件
+        // 一下插件包都需要提前安装
+        // 通过这个配置也可以添加其他 babel 插件
+        plugins: [
+          // 适配 styled-component
+          'babel-plugin-styled-components',
+          // 适配 emotion
+          '@emotion/babel-plugin'
+        ]
+      },
+      // 对于 emotion，需要单独加上这个配置
+      // 通过这个包来编译 emotion 中的特殊 jsx 语法
+      jsxImportSource: '@emotion/react'
+    }),
+    viteStylelint({
+      exclude: 'node_modules/'
+    })
+  ]
+});
