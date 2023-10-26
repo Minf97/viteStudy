@@ -2,6 +2,7 @@ import { defineConfig, normalizePath } from 'vite'
 import react from '@vitejs/plugin-react'
 // 如果类型报错，需要安装 @types/node: pnpm i @types/node -D
 import path from "path";
+import autoprefixer from "autoprefixer"
 
 // 用 normalizePath 解决 window 下的路径问题
 const variablePath = normalizePath(path.resolve('./src/variable.scss'));
@@ -25,7 +26,15 @@ export default defineConfig({
       // name表示当前文件名，local表示类名
       generateScopedName: "[name]__[local]__[hash:base64:5]"
     },
-    
+    // 3. PostCSS
+    postcss: {
+      plugins: [
+        autoprefixer({
+          // 指定目标浏览器
+          overrideBrowserslist: ['Chrome > 40', 'ff > 31', 'ie 11']
+        })
+      ]
+    }
   },
   plugins: [react()],
 })
