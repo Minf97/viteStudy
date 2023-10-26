@@ -11,13 +11,21 @@ const variablePath = normalizePath(path.resolve('./src/variable.scss'));
 export default defineConfig({
   // css 相关的配置
   css: {
+    // 1. 预处理器
     preprocessorOptions: {
       // 这里是scss的配置，vite只是封装了一下，更多详细得去看scss文档
       scss: {
         // additionalData 的内容会在每个 scss 文件的开头自动注入
         additionalData: `@import "${variablePath}";`
       }
-    }
+    },
+    // 2. CSS Modules
+    modules: {
+      // 通过 generateScopedName 控制生成的类名
+      // name表示当前文件名，local表示类名
+      generateScopedName: "[name]__[local]__[hash:base64:5]"
+    },
+    
   },
   plugins: [react()],
 })
