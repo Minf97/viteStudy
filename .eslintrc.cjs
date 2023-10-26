@@ -16,9 +16,9 @@ module.exports = {
     "extends": [
         "eslint:recommended",
         "plugin:react/recommended",
+        // prettier
+        "prettier",
         "plugin:@typescript-eslint/recommended"
-    ],
-    "overrides": [
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
@@ -27,9 +27,11 @@ module.exports = {
     },
     "plugins": [
         "react",
-        "@typescript-eslint"
+        "@typescript-eslint",
+        "prettier"
     ],
     "rules": {
+        "prettier/prettier": "error",
         "indent": [
             "error",
             "tab"
