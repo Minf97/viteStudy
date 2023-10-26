@@ -1,7 +1,17 @@
 module.exports = {
     "env": {
         "browser": true,
-        "es2021": true
+        "es2021": true,
+        "node": true,
+    },
+    "globals": {
+        // 可以重写
+        "wx": true,
+        // 不可重写
+        "$": false,
+        "jQuery": false,
+        // 禁用
+        "uni": "off"
     },
     "extends": [
         "eslint:recommended",
