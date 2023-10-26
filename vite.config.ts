@@ -36,5 +36,20 @@ export default defineConfig({
       ]
     }
   },
-  plugins: [react()],
+  plugins: [react({
+    babel: {
+      // 加入babel 插件
+      // 一下插件包都需要提前安装
+      // 通过这个配置也可以添加其他 babel 插件
+      plugins: [
+        // 适配 styled-component
+        "babel-plugin-styled-components",
+        // 适配 emotion
+        "@emotion/babel-plugin"
+      ]
+    },
+    // 对于 emotion，需要单独加上这个配置
+    // 通过这个包来编译 emotion 中的特殊 jsx 语法
+    jsxImportSource: "@emotion/react"
+  })],
 })
